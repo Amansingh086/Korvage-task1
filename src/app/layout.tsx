@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReduxProvider } from "./components/ReduxProvider";
 import { TaskHydrator } from "./components/TaskHydrator";
+import { AuthProvider } from "./components/AuthProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,10 +32,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ReduxProvider>
-          <TaskHydrator />
-          {children}
-        </ReduxProvider>
+        <AuthProvider>
+          <ReduxProvider>
+            <TaskHydrator />
+            {children}
+          </ReduxProvider>
+        </AuthProvider>
       </body>
     </html>
   );
